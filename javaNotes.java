@@ -219,3 +219,100 @@ public class UserNotFoundException extends Exception {
         super(message);
     }
 }
+
+
+// ----------------------------- Methods to create objects ----------------------------------------------------------- //
+// a. Using 'new key word'
+class Student {
+    int id;
+    String name;
+ 
+    public static void main(String args[])
+    {
+        Student s1 = new Student();
+        System.out.println(s1.id);
+    }
+}
+
+/* 
+In Java, new is an operator where newInstance() is a method where both are used for object creation. 
+If we know the type of object to be created then we can use a new operator.
+But if we do not know the type of object to be created in beginning and is passed at runtime, the newInstance() method is used.
+*/
+
+// b. Using 'new Instance' ---> [Object created for class:A]
+class A {
+	int a;
+}
+
+public class GFG {
+	// To create an instance of class whose name is
+	// passed as a string 'c'.
+	public static void fun(String c)
+		throws InstantiationException,
+			IllegalAccessException,
+			ClassNotFoundException
+	{
+
+		// Creating an object of type 'c'
+		Object obj = Class.forName(c).newInstance();
+
+		// Printing the type of object created
+		System.out.println("Object created for class:"
+						+ obj.getClass().getName());
+	}
+
+	// Main driver method
+	public static void main(String[] args)
+		throws InstantiationException,
+			IllegalAccessException,
+			ClassNotFoundException
+	{
+		// Calling above method over "A"
+		fun("A");
+	}
+}
+
+// c. Using clone() method - Implementing Cloneable interface
+class GFG implements Cloneable {
+    @Override
+    protected Object clone()
+        throws CloneNotSupportedException
+    {
+        // Super() keyword refers to parent class
+        return super.clone();
+    }
+    String name = "GeeksForGeeks";
+
+    public static void main(String[] args)
+    {
+        GFG obj1 = new GFG();
+        try {
+            GFG obj2 = (GFG)obj1.clone();
+            System.out.println(obj2.name);
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
