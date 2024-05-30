@@ -297,6 +297,232 @@ class GFG implements Cloneable {
     }
 }
 
+// d. Deserialization [De-serialization is a technique of reading an object from the saved state in a file.]
+FileInputStream file = new FileInputStream(filename);
+ObjectInputStream in = new ObjectInputStream(file);
+Object obj = in.readObject();
+
+
+// ----------------------------- Interfaces ----------------------------------------------------------- //
+// A class which implements an interface should implement ALL of the interface's abstract methods
+
+// a. A simple interface
+interface Player
+{
+    final int id = 10;
+    int move();
+}
+
+// b. Java program to demonstrate the real-world example of Interfaces (Car, Bycicle are both vehicles and display similar behaviours and consist common functionalities)
+
+import java.io.*;
+interface Vehicle {
+    
+    // all are the abstract methods.
+    void changeGear(int a);
+    void speedUp(int a);
+    void applyBrakes(int a);
+}
+
+class Bicycle implements Vehicle{
+    
+    int speed;
+    int gear;
+    
+    @Override
+    public void changeGear(int newGear){ 
+        gear = newGear;
+    }
+    
+    @Override
+    public void speedUp(int increment){
+        speed = speed + increment;
+    }
+    
+    @Override
+    public void applyBrakes(int decrement){      
+        speed = speed - decrement;
+    }
+    
+    public void printStates() {
+        System.out.println("speed: " + speed
+            + " gear: " + gear);
+    }
+}
+
+class GFG {
+    
+    public static void main (String[] args) {
+    
+        // creating an instance of Bicycle doing some operations
+        Bicycle bicycle = new Bicycle();
+        bicycle.changeGear(2);
+        bicycle.speedUp(3);
+        bicycle.applyBrakes(1);
+        
+        System.out.println("Bicycle present state :");
+        bicycle.printStates();
+    }
+}
+
+// c. Multiple Inheritance (Java program to demonstrate How Diamond Problem is Handled in case of Default Methods)
+
+// Interface 1
+interface API {
+    // Default method
+    default void show()
+    {
+        System.out.println("Default API");
+    }
+}
+
+// Interface 2
+// Extending the above interface
+interface Interface1 extends API {
+    void display();
+}
+
+// Interface 3
+interface Interface2 extends API {
+    void print();
+}
+
+class TestClass implements Interface1, Interface2 {
+    public void display()
+    {
+        System.out.println("Display from Interface1");
+    }
+
+    public void print()
+    {
+        System.out.println("Print from Interface2");
+    }
+
+    public static void main(String args[])
+    {
+        TestClass d = new TestClass();
+
+        // Now calling the methods from both the interfaces
+        d.show(); // Default method from API
+        d.display(); // Overridden method from Interface1
+        d.print(); // Overridden method from Interface2
+    }
+}
+
+// d. JDK 8 Updates
+	//	1. Usage of default methods 
+	/* Prior to JDK 8, the interface could not define the implementation. We can now add default implementation for interface methods.
+     Suppose we need to add a new function to an existing interface. Obviously, the old code will not work as the classes have not implemented those new functions. 
+	 So with the help of default implementation, we will give a default body for the newly added functions. Then the old codes will still work.*/
+	 
+	// 2. Static methods in interfaces that can be called independently without an object
+	interface In1
+	{
+		final int a = 10;
+		static void display()
+		{
+			System.out.println("hello");
+		}
+	}
+
+	class TestClass implements In1
+	{
+		public static void main (String[] args)
+		{
+			In1.display();
+		}
+	}
+	
+// e. Extending Interfaces
+// When a class implements an interface that inherits another interface, it must provide an implementation for all methods required by the interface inheritance chain.
+interface A {
+    void method1();
+    void method2();
+}
+
+interface B extends A {
+    void method3();
+}
+// the class must implement all method of A and B.
+class gfg implements B {
+    public void method1()
+    {
+        System.out.println("Method 1");
+    }
+    public void method2()
+    {
+        System.out.println("Method 2");
+    }
+    public void method3()
+    {
+        System.out.println("Method 3");
+    }
+}
+
+// f. Interfaces, Abstract Classes and Implementation Classes
+/* 
+In general, the development process is step by step. If a class cant implement ALL methods in the extended interface, make that class abstract and do partial implementation.
+It is possible to declare multiple child classes but at final, we have to complet the implementation of ALL abstract methods.
+Level 1 – interfaces: It contains the service details.
+Level 2 – abstract classes: It contains partial implementation.
+Level 3 – implementation classes: It contains all implementations.
+Level 4 – Final Code / Main Method: It have access of all interfaces data.
+*/
+
+	// Java Program for implementation Level wise
+	import java.io.*;
+	import java.lang.*;
+	import java.util.*;
+
+	// Level 1
+	interface Bank {
+		void deposit();
+		void withdraw();
+		void loan();
+		void account();
+	}
+
+	// Level 2
+	abstract class Dev1 implements Bank {
+		public void deposit()
+		{
+			System.out.println("Your deposit Amount :" + 100);
+		}
+	}
+
+	abstract class Dev2 extends Dev1 {
+		public void withdraw()
+		{
+			System.out.println("Your withdraw Amount :" + 50);
+		}
+	}
+
+	// Level 3
+	class Dev3 extends Dev2 {
+		public void loan() {}
+		public void account() {}
+	}
+
+	// Level 4
+	class GFG {
+		public static void main(String[] args)
+		{
+			Dev3 d = new Dev3();
+			d.account();
+			d.loan();
+			d.deposit();
+			d.withdraw();
+		}
+	}
+
+/* g. JDK 9
+	1. Static methods
+	2. Private methods
+	3. Private Static methods 
+*/
+
+
+// ----------------------------- OOP - Inheritance ----------------------------------------------------------- //
 
 
 
@@ -313,6 +539,19 @@ class GFG implements Cloneable {
 // ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
 // ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
 // ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
-// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
-// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
-// ----------------------------- Exceptions and Errors ----------------------------------------------------------- //
+
+
+// ----------------------------- Random ----------------------------------------------------------- //
+/* a. Using a parent class reference variable to store a sub-class object. 
+In this case, we can switch into different subclass objects using the same referenced variable. 
+*/
+class Animal {}
+class Dog extends Animal {}
+class Cat extends Animal {}
+public class Test
+{
+    // using Dog object
+    Animal obj = new Dog();
+    // using Cat object
+    obj = new Cat();
+}
